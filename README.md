@@ -1,3 +1,17 @@
+# elementerra-events
+
+## Frontend available at https://nedrise27.github.io/elementerra-tools/feed
+
+I have no clue what i'm doing. I just learned all the Solana stuff while building this.
+As always, take everything with a grain of salt.
+
+If you want to contribute just open an issue or write me an email: ned.rise.io@gmail.com
+
+Happy crafting!
+
+
+## Build with
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
