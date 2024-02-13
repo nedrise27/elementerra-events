@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: "elementerra-index",
+    name: "elementerra-events",
     script: "./dist/main.js",
     wait_ready: true,
     env_development: {
