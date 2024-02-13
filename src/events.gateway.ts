@@ -24,8 +24,5 @@ export class EventsGateway {
 
   public async sendEvent(timestamp: number, playerAddress: string, event: any) {
     this.server.emit(this.EVENTS_TOPIC, { timestamp, playerAddress, event });
-    // this.server.clients.forEach((client) =>
-    //   client.send(JSON.stringify({ timestamp, playerAddress, event })),
-    // );
   }
 }

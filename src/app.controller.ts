@@ -13,6 +13,6 @@ export class AppController {
     @Body() request: SendEventRequest,
   ) {
     checkAuthHeader(authHeader);
-    this.eventsGateway.sendEvent(request.timestamp, request.user, request.data);
+    this.eventsGateway.sendEvent(request.timestamp, request.user, request.event);
   }
 }
