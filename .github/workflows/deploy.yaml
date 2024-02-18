@@ -1,0 +1,34 @@
+name: Deploy Service
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    env:
+      SSH_USER: admin
+      SSH_KEY: ${{ secrets.ELEMENTERRA_ACTIONS_SSH_KEY }}
+      DEPLOYMENT_HOST: ${{ secrets.DEPLOYMENT_HOST }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure ssh
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/id_ed 
+          chmod 600 ~/.ssh/id_ed
+
+      - name: Fill update deployment script with secrets
+        run: |
+          sed -i \
+            -e "s|__PAIN_TEXT_PASSWORD__|${{ secrets.PAIN_TEXT_PASSWORD }}|g" \
+            -e "s|__DISCORD_FORGING_CHANNEL_WEBHOOK_URL__|${{ secrets.DISCORD_FORGING_CHANNEL_WEBHOOK_URL }}|g" \
+            -e "s|__DISCORD_INVENTING_CHANNEL_WEBHOOK_URL__|${{ secrets.DISCORD_INVENTING_CHANNEL_WEBHOOK_URL }}|g" \
+            pull_and_deploy.sh
+
+      - name: Trigger deployment on host
+        run: ssh -i ~/.ssh/id_ed -o StrictHostKeyChecking=no $SSH_USER@$DEPLOYMENT_HOST 'bash -s' < pull_and_deploy.sh

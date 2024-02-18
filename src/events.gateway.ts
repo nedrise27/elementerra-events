@@ -22,7 +22,7 @@ export class EventsGateway {
     return data;
   }
 
-  public async sendEvent(timestamp: number, playerAddress: string, event: any) {
+  public sendEvent(timestamp: number, playerAddress: string, event: any) {
     console.log(`Will send event with ${timestamp} ${playerAddress} ${event}`);
     this.server.emit(this.EVENTS_TOPIC, { timestamp, playerAddress, event });
   }
