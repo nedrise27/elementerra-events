@@ -23,11 +23,13 @@ export class DiscordService {
   public async sendToChannel(event: ForgeEvent) {
     if (event.eventTopic === EventTopics.forging) {
       const content = `${event.user} forged ${event.element} with recipe ${this.printRecipe(event.recipe)}`;
+      console.log(`Will send message: '${content} to forge-events'`)
       return this.forgingClient.send({ content });
     }
 
     if (event.eventTopic === EventTopics.inventing) {
       const content = `${event.user} invented ${event.element}! The recipe was ${this.printRecipe(event.recipe)}`;
+      console.log(`Will send message: '${content} to invention-events'`)
       return this.inventingClient.send({ content });
     }
 
