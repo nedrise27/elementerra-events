@@ -1,6 +1,7 @@
 export enum EventTopics {
-  forging = 'forging',
   inventing = 'inventing',
+  inventionAttempt = 'inventionAttempt',
+  forging = 'forging',
 }
 
 export class ForgeEvent {
