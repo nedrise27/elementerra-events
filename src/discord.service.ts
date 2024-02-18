@@ -16,15 +16,18 @@ export class DiscordService {
     });
   }
 
+  private printElement(element: string): string {
+    return `:${element.toLowerCase()}:`;
+  }
   private printRecipe(recipe: [string, string, string, string]): string {
-    return recipe.map((element) => `:${element}:`).join(' + ');
+    return recipe.map(this.printElement).join(' + ');
   }
 
   public async sendToChannel(event: ForgeEvent) {
     if (event.eventTopic === EventTopics.forging) {
       let content: string;
       if (event.isSuccess) {
-        content = `${event.user} forged ${event.element} with recipe ${this.printRecipe(event.recipe)}`;
+        content = `${event.user} forged ${this.printElement(event.element)} with recipe ${this.printRecipe(event.recipe)}`;
       } else {
         content = `${event.user} tried a new recipe ${this.printRecipe(event.recipe)} and failed -.-`;
       }
