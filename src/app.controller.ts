@@ -25,11 +25,13 @@ export class AppController {
   }
 
   @Post('send-event')
-  sendDiscordMessage(
+  async sendDiscordMessage(
     @Headers('Authorization') authHeader: string,
     @Body() request: ForgeEvent,
   ) {
     checkAuthHeader(authHeader);
-    return this.discordService.sendToChannel(request);
+
+    this.eventsGateway.sendForgeEvent(request);
+    await this.discordService.sendToChannel(request);
   }
 }

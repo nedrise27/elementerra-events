@@ -5,6 +5,7 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'ws';
+import { EventTopics, ForgeEvent } from './requests/ForgeEvent';
 
 @WebSocketGateway({
   cors: {
@@ -20,6 +21,22 @@ export class EventsGateway {
   @SubscribeMessage('events')
   handleEvent(@MessageBody() data: any) {
     return data;
+  }
+
+  @SubscribeMessage('forging')
+  handleForgingEvent(@MessageBody() data: any) {
+    return data;
+  }
+
+  @SubscribeMessage('inventing')
+  handleInventngEvent(@MessageBody() data: any) {
+    return data;
+  }
+
+  public sendForgeEvent(event: ForgeEvent) {
+    console.log(`Will send event: ${JSON.stringify(event, null, 0)}`);
+
+    this.server.emit(event.eventTopic, event);
   }
 
   public sendEvent(timestamp: number, playerAddress: string, event: any) {
