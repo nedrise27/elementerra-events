@@ -9,5 +9,6 @@ export class ForgeEvent {
   user: string;
   event: any;
   element: string;
+  isSuccess: boolean;
   recipe: [string, string, string, string];
 }
