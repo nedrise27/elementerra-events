@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { WebhookClient } from 'discord.js';
 import { EventTopics, ForgeEvent } from './requests/ForgeEvent';
+import _ from 'lodash';
+import { ELEMENT_ICONS } from './lib/elements';
 
 @Injectable()
 export class DiscordService {
@@ -21,7 +23,11 @@ export class DiscordService {
   }
 
   private printElement(element: string): string {
-    return `:${element.toLowerCase()}:`;
+    const iconOrName = ELEMENT_ICONS[element];
+    if (!_.isNil(iconOrName)) {
+      return iconOrName
+    }
+    return `<:${element.toLowerCase()}:>`;
   }
   private printRecipe(recipe: [string, string, string, string]): string {
     return recipe.map(this.printElement).join(' + ');
