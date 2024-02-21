@@ -23,11 +23,12 @@ export class DiscordService {
   }
 
   private printElement(element: string): string {
-    const iconOrName = ELEMENT_ICONS[element];
+    const lower = element.toLowerCase();
+    const iconOrName = ELEMENT_ICONS[lower];
     if (!_.isNil(iconOrName)) {
       return iconOrName;
     }
-    return `<:${element.toLowerCase()}:>`;
+    return `<:${lower}:>`;
   }
   private printRecipe(recipe: [string, string, string, string]): string {
     return recipe.map(this.printElement).join(' + ');
