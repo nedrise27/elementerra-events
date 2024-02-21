@@ -23,7 +23,7 @@ export class DiscordService {
   }
 
   private printElement(element: string): string {
-    const lower = element.toLowerCase();
+    const lower = element.toLowerCase().replaceAll(' ', '');
     const iconOrName = ELEMENT_ICONS[lower];
     if (!_.isNil(iconOrName)) {
       return iconOrName;
