@@ -37,15 +37,15 @@ export class DiscordService {
 
   public async sendToChannel(event: ForgeEvent) {
     if (event.eventTopic === EventTopics.inventing) {
-      const content = `${event.user} invented ${event.element}! The recipe was ${this.printRecipe(event.recipe)}`;
+      const content = `${event.user} invented **${event.element}**! The recipe was: **${this.printRecipe(event.recipe)}**`;
       return this.inventingClient.send({ content });
     }
     if (event.eventTopic === EventTopics.inventionAttempt) {
-      const content = `${event.user} tried a new recipe ${this.printRecipe(event.recipe)}`;
+      const content = `${event.user} tried a new recipe: **${this.printRecipe(event.recipe)}**`;
       return this.inventionAttemptsClient.send({ content });
     }
     if (event.eventTopic === EventTopics.forging) {
-      const content = `${event.user} forged ${this.printElement(event.element)} with recipe ${this.printRecipe(event.recipe)}`;
+      const content = `${event.user} forged **${event.element}** with recipe: **${this.printRecipe(event.recipe)}**`;
       return this.forgingClient.send({ content });
     }
 
