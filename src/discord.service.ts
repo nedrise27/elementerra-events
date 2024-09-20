@@ -31,6 +31,7 @@ export class DiscordService {
     return `<:${lower}:>`;
   }
   private printRecipe(recipe: [string, string, string, string]): string {
+    return recipe.join(' + ');
     return recipe.map(this.printElement).join(' + ');
   }
 
